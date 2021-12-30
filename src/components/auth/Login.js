@@ -21,7 +21,7 @@ const Login = (props) => {
     if (message) {
       showAlert(message.msg, message.cat);
     }
-  
+
     // eslint-disable-next-line
   }, [message, authenticated, props.history]);
 
@@ -30,6 +30,7 @@ const Login = (props) => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const { email, password } = user;
 
@@ -40,27 +41,31 @@ const Login = (props) => {
     });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     if (email.trim() === "" || password.trim() === "") {
       showAlert("All fields are required!", "alert-error");
+      return;
     }
 
     // Pass to action
-    login({ email, password });
+    setLoading(true);
+    await login({ email, password });
+    setLoading(false);
   };
 
   return (
     <div className="form-user">
       {alert ? <div className={`alert ${alert.cat}`}>{alert.msg}</div> : null}
       <div className="container-form shadow-dark">
-        <h1>Login</h1>
+        <h1 data-cy="login-title">Login</h1>
 
-        <form onSubmit={onSubmit}>
+        <form data-cy="login-form" onSubmit={onSubmit}>
           <div className="form-field">
             <label htmlFor="email">Email</label>
             <input
+              data-cy="login-form-email"
               type="email"
               id="email"
               name="email"
@@ -73,6 +78,7 @@ const Login = (props) => {
           <div className="form-field">
             <label htmlFor="password">Password</label>
             <input
+              data-cy="login-form-password"
               type="password"
               id="password"
               name="password"
@@ -81,17 +87,25 @@ const Login = (props) => {
               onChange={onChange}
             />
           </div>
-
-          <div className="form-field">
-            <input
-              type="submit"
-              className="btn btn-primary btn-block"
-              value="Login"
-            />
-          </div>
+          {loading ? (
+            <div className="spinner"></div>
+          ) : (
+            <div className="form-field">
+              <input
+                data-cy="login-form-submit"
+                type="submit"
+                className="btn btn-primary btn-block"
+                value="Login"
+              />
+            </div>
+          )}
         </form>
 
-        <Link to={"/new-account"} className="account-link">
+        <Link
+          data-cy="login-signup"
+          to={"/new-account"}
+          className="account-link"
+        >
           Sign up
         </Link>
       </div>

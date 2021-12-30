@@ -32,6 +32,7 @@ const NewAccount = (props) => {
     password: "",
     confirm: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const { name, email, password, confirm } = user;
 
@@ -42,7 +43,7 @@ const NewAccount = (props) => {
     });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     // To validate empty fields
@@ -69,19 +70,26 @@ const NewAccount = (props) => {
     }
 
     // Pass to action
-    registerUser({ nombre: name, email, password });
+    setLoading(true);
+    await registerUser({ nombre: name, email, password });
+    setLoading(false);
   };
 
   return (
     <div className="form-user">
-      {alert ? <div className={`alert ${alert.cat}`}>{alert.msg}</div> : null}
+      {alert ? (
+        <div data-cy="signup-alert" className={`alert ${alert.cat}`}>
+          {alert.msg}
+        </div>
+      ) : null}
       <div className="container-form shadow-dark">
-        <h1>New Account</h1>
+        <h1 data-cy="signup-title">New Account</h1>
 
-        <form onSubmit={onSubmit}>
+        <form data-cy="signup-form" onSubmit={onSubmit}>
           <div className="form-field">
             <label htmlFor="name">Name</label>
             <input
+              data-cy="signup-form-name"
               type="text"
               id="name"
               name="name"
@@ -94,6 +102,7 @@ const NewAccount = (props) => {
           <div className="form-field">
             <label htmlFor="email">Email</label>
             <input
+              data-cy="signup-form-email"
               type="email"
               id="email"
               name="email"
@@ -106,6 +115,7 @@ const NewAccount = (props) => {
           <div className="form-field">
             <label htmlFor="password">Password</label>
             <input
+              data-cy="signup-form-password"
               type="password"
               id="password"
               name="password"
@@ -118,6 +128,7 @@ const NewAccount = (props) => {
           <div className="form-field">
             <label htmlFor="confirm">Confirm password</label>
             <input
+              data-cy="signup-form-confirm"
               type="password"
               id="confirm"
               name="confirm"
@@ -128,15 +139,20 @@ const NewAccount = (props) => {
           </div>
 
           <div className="form-field">
-            <input
-              type="submit"
-              className="btn btn-primary btn-block"
-              value="Sign up"
-            />
+            {loading ? (
+              <div className="spinner"></div>
+            ) : (
+              <input
+                data-cy="signup-form-submit"
+                type="submit"
+                className="btn btn-primary btn-block"
+                value="Sign up"
+              />
+            )}
           </div>
         </form>
 
-        <Link to={"/"} className="account-link">
+        <Link data-cy="signup-login" to={"/"} className="account-link">
           Back to the login page
         </Link>
       </div>

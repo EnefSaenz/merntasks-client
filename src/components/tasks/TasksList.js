@@ -13,7 +13,7 @@ const TasksList = () => {
   const { tasks } = taskContext;
 
   // If there aren't projects
-  if (!project) return <h2>Select a project</h2>;
+  if (!project) return <h2 data-cy="tasks-toSelect">Select a project</h2>;
 
   // Array destructuring
   const [actualProject] = project;

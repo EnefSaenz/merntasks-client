@@ -36,11 +36,18 @@ const TasksProvider = (props) => {
       });
     } catch (error) {
       let alert = {};
-      if (error.response.data.msg) {
-        alert = { msg: error.response.data.msg, cat: "alert-error" };
+      if (error.response) {
+        if (error.response.data.msg) {
+          alert = { msg: error.response.data.msg, cat: "alert-error" };
+        } else {
+          alert = {
+            msg: error.response.data.errores[0].msg,
+            cat: "alert-error",
+          };
+        }
       } else {
         alert = {
-          msg: error.response.data.errores[0].msg,
+          msg: "Something was wrong, try again later!",
           cat: "alert-error",
         };
       }
@@ -61,11 +68,18 @@ const TasksProvider = (props) => {
       });
     } catch (error) {
       let alert = {};
-      if (error.response.data.msg) {
-        alert = { msg: error.response.data.msg, cat: "alert-error" };
+      if (error.response) {
+        if (error.response.data.msg) {
+          alert = { msg: error.response.data.msg, cat: "alert-error" };
+        } else {
+          alert = {
+            msg: error.response.data.errores[0].msg,
+            cat: "alert-error",
+          };
+        }
       } else {
         alert = {
-          msg: error.response.data.errores[0].msg,
+          msg: "Something was wrong, try again later!",
           cat: "alert-error",
         };
       }
@@ -86,11 +100,18 @@ const TasksProvider = (props) => {
       });
     } catch (error) {
       let alert = {};
-      if (error.response.data.msg) {
-        alert = { msg: error.response.data.msg, cat: "alert-error" };
+      if (error.response) {
+        if (error.response.data.msg) {
+          alert = { msg: error.response.data.msg, cat: "alert-error" };
+        } else {
+          alert = {
+            msg: error.response.data.errores[0].msg,
+            cat: "alert-error",
+          };
+        }
       } else {
         alert = {
-          msg: error.response.data.errores[0].msg,
+          msg: "Something was wrong, try again later!",
           cat: "alert-error",
         };
       }
@@ -111,11 +132,18 @@ const TasksProvider = (props) => {
       });
     } catch (error) {
       let alert = {};
-      if (error.response.data.msg) {
-        alert = { msg: error.response.data.msg, cat: "alert-error" };
+      if (error.response) {
+        if (error.response.data.msg) {
+          alert = { msg: error.response.data.msg, cat: "alert-error" };
+        } else {
+          alert = {
+            msg: error.response.data.errores[0].msg,
+            cat: "alert-error",
+          };
+        }
       } else {
         alert = {
-          msg: error.response.data.errores[0].msg,
+          msg: "Something was wrong, try again later!",
           cat: "alert-error",
         };
       }
@@ -143,11 +171,18 @@ const TasksProvider = (props) => {
       });
     } catch (error) {
       let alert = {};
-      if (error.response.data.msg) {
-        alert = { msg: error.response.data.msg, cat: "alert-error" };
+      if (error.response) {
+        if (error.response.data.msg) {
+          alert = { msg: error.response.data.msg, cat: "alert-error" };
+        } else {
+          alert = {
+            msg: error.response.data.errores[0].msg,
+            cat: "alert-error",
+          };
+        }
       } else {
         alert = {
-          msg: error.response.data.errores[0].msg,
+          msg: "Something was wrong, try again later!",
           cat: "alert-error",
         };
       }

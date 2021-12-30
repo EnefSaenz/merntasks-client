@@ -37,7 +37,15 @@ const ProjectProvider = (props) => {
         payload: response.data.proyectos,
       });
     } catch (error) {
-      const alert = { msg: error.response.data.msg, cat: "alert-error" };
+      let alert = {};
+      if (error.response) {
+        alert = { msg: error.response.data.msg, cat: "alert-error" };
+      } else {
+        alert = {
+          msg: "Something was wrong, try again later!",
+          cat: "alert-error",
+        };
+      }
       dispatch({
         type: PROJECT_ERROR,
         payload: alert,
@@ -55,11 +63,18 @@ const ProjectProvider = (props) => {
       });
     } catch (error) {
       let alert = {};
-      if (error.response.data.msg) {
-        alert = { msg: error.response.data.msg, cat: "alert-error" };
+      if (error.response) {
+        if (error.response.data.msg) {
+          alert = { msg: error.response.data.msg, cat: "alert-error" };
+        } else {
+          alert = {
+            msg: error.response.data.errores[0].msg,
+            cat: "alert-error",
+          };
+        }
       } else {
         alert = {
-          msg: error.response.data.errores[0].msg,
+          msg: "Something was wrong, try again later!",
           cat: "alert-error",
         };
       }
@@ -86,7 +101,15 @@ const ProjectProvider = (props) => {
         payload: projectId,
       });
     } catch (error) {
-      const alert = { msg: error.response.data.msg, cat: "alert-error" };
+      let alert = {};
+      if (error.response) {
+        alert = { msg: error.response.data.msg, cat: "alert-error" };
+      } else {
+        alert = {
+          msg: "Something was wrong, try again later!",
+          cat: "alert-error",
+        };
+      }
       dispatch({
         type: PROJECT_ERROR,
         payload: alert,

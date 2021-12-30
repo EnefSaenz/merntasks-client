@@ -21,6 +21,7 @@ const NavBar = () => {
 
       <nav className="nav-main">
         <button
+          data-cy="navbar-signout"
           className="btn btn-blank sign-out"
           onClick={() => {
             logout();
